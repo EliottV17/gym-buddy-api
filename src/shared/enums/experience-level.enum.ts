@@ -1,0 +1,5 @@
+export enum ExperienceLevel {
+  BEGGINER = 'BEGGINER',
+  INTERMEDIATE = 'INTERMEDIATE',
+  ADVANCED = 'ADVANCED',
+}

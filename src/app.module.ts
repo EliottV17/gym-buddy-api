@@ -27,4 +27,4 @@ import { MessagesModule } from './messages/messages.module.js';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
