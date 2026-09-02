@@ -5,22 +5,25 @@ import { UsersModule } from './users/users.module.js';
 import { SwipesModule } from './swipes/swipes.module.js';
 import { MatchesModule } from './matches/matches.module.js';
 import { MessagesModule } from './messages/messages.module.js';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'admin',
-      password: 'admin_password',
-      database: 'workout_match_db',
-      autoLoadEntities: true,
-      synchronize: true,
-    }),
     ConfigModule.forRoot({
       isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: 'postgres',
+        host: configService.get<string>('DB_HOST'),
+        port: configService.get<number>('DB_PORT'),
+        username: configService.get<string>('DB_USER'),
+        password: configService.get<string>('DB_PASSWORD'),
+        database: configService.get<string>('DB_NAME'),
+        autoLoadEntities: true,
+        synchronize: configService.get<string>('DB_SYNCHRONIZE') === 'true',
+      })
     }),
     AuthModule,
     UsersModule,
