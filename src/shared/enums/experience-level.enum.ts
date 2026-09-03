@@ -1,5 +1,5 @@
 export enum ExperienceLevel {
-  BEGGINER = 'BEGGINER',
+  BEGINNER = 'BEGINNER',
   INTERMEDIATE = 'INTERMEDIATE',
   ADVANCED = 'ADVANCED',
 }
