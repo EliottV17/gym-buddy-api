@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity.js';
+import { SwipeAction } from '../swipe-action.enum.js';
 
 @Entity('swipes')
 @Index(['swiper', 'swiped'], { unique: true })
@@ -23,8 +24,8 @@ export class Swipe {
   @JoinColumn({ name: 'swiped_id' })
   swiped: User;
 
-  @Column({ type: 'enum', enum: ['like', 'dislike'] })
-  action: string;
+  @Column({ type: 'enum', enum: SwipeAction })
+  action: SwipeAction;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
