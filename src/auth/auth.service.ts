@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from '../users/users.service.js';
 import { RegisterDto } from './dto/register.dto.js';
 import { HashingService } from '../hashing/hashing.service.js';
@@ -10,10 +14,10 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly hashingService: HashingService,
-    private readonly jwtService: JwtService) { }
+    private readonly jwtService: JwtService,
+  ) { }
 
   async register(registerDto: RegisterDto) {
-
     const user = await this.usersService.findOneByEmail(registerDto.email);
 
     if (user) {
@@ -28,22 +32,23 @@ export class AuthService {
       ...rest,
       passwordHash: hashedPassword,
     };
-    return await this.usersService.create(userToCreate);
+    return this.usersService.create(userToCreate);
   }
 
-
   async login(loginDto: LoginDto) {
-
     const user = await this.usersService.findOneByEmail(loginDto.email);
 
     if (!user) {
       throw new UnauthorizedException('Email or password is wrong');
     }
 
-    const isPasswordValid = await this.hashingService.compare(loginDto.password, user.passwordHash);
+    const isPasswordValid = await this.hashingService.compare(
+      loginDto.password,
+      user.passwordHash,
+    );
 
     if (!isPasswordValid) {
-      throw new UnauthorizedException('Email or password is wrong')
+      throw new UnauthorizedException('Email or password is wrong');
     }
 
     const payload = { sub: user.id, email: user.email };
@@ -53,8 +58,8 @@ export class AuthService {
     return {
       token,
       user: {
-        email: user.email
-      }
+        email: user.email,
+      },
     };
   }
 }

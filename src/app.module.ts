@@ -23,15 +23,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         database: configService.get<string>('DB_NAME'),
         autoLoadEntities: true,
         synchronize: configService.get<string>('DB_SYNCHRONIZE') === 'true',
-      })
+      }),
     }),
     AuthModule,
     UsersModule,
     SwipesModule,
     MatchesModule,
-    MessagesModule
+    MessagesModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule { }
+export class AppModule {}

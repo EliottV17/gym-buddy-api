@@ -7,6 +7,6 @@ import { Match } from './entities/match.entity.js';
 @Module({
   imports: [TypeOrmModule.forFeature([Match])],
   providers: [MatchesService],
-  controllers: [MatchesController]
+  controllers: [MatchesController],
 })
-export class MatchesModule { }
+export class MatchesModule {}

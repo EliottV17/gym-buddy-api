@@ -7,6 +7,6 @@ import { Swipe } from './entities/swipe.entity.js';
 @Module({
   imports: [TypeOrmModule.forFeature([Swipe])],
   providers: [SwipesService],
-  controllers: [SwipesController]
+  controllers: [SwipesController],
 })
-export class SwipesModule { }
+export class SwipesModule {}

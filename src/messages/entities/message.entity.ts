@@ -1,6 +1,13 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Match } from "../../matches/entities/match.entity.js";
-import { User } from "../../users/entities/user.entity.js";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Match } from '../../matches/entities/match.entity.js';
+import { User } from '../../users/entities/user.entity.js';
 
 @Entity('messages')
 export class Message {
