@@ -16,7 +16,7 @@ export class SwipesService {
     @InjectRepository(Swipe)
     private readonly swipeRepository: Repository<Swipe>,
     private readonly matchesService: MatchesService,
-  ) { }
+  ) {}
 
   async create(
     userId: string,
