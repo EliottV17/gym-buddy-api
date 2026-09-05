@@ -20,7 +20,7 @@ export class MatchesService {
   constructor(
     @InjectRepository(Match)
     private readonly matchRepository: Repository<Match>,
-  ) { }
+  ) {}
 
   async create(userA: string, userB: string): Promise<Match | null> {
     const [user1, user2] = [userA, userB].sort();
