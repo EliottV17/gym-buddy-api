@@ -24,7 +24,9 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Get('me')
-  getProfile(@Request() req: TypedRequest): Promise<User | null> {
+  getProfile(
+    @Request() req: TypedRequest,
+  ): Promise<Omit<User, 'passwordHash'> | null> {
     return this.usersService.findOneById(req.user.sub);
   }
 
@@ -32,7 +34,7 @@ export class UsersController {
   updateProfile(
     @Request() req: TypedRequest,
     @Body() updateProfileDto: UpdateProfileDto,
-  ): Promise<User | null> {
+  ): Promise<Omit<User, 'passwordHash'> | null> {
     return this.usersService.updateProfile(req.user.sub, updateProfileDto);
   }
 
@@ -41,7 +43,7 @@ export class UsersController {
     @Request() req: TypedRequest,
     @Query('page') page?: string,
     @Query('limit') limit?: string,
-  ): Promise<User[]> {
+  ): Promise<Omit<User, 'passwordHash'>[]> {
     const pageNum = Math.max(1, parseInt(page ?? '1', 10));
     const limitNum = Math.min(20, Math.max(1, parseInt(limit ?? '20', 10)));
     return this.usersService.findSuggestions(req.user.sub, pageNum, limitNum);
