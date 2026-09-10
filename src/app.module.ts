@@ -6,11 +6,21 @@ import { SwipesModule } from './swipes/swipes.module.js';
 import { MatchesModule } from './matches/matches.module.js';
 import { MessagesModule } from './messages/messages.module.js';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt'; // 1. Importa el JwtModule
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+    }),
+    // 2. Configura el JwtModule de manera global usando tus variables de entorno
+    JwtModule.registerAsync({
+      global: true, // ✨ Esto lo hace accesible en toda la aplicación
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '1d' }, // Puedes ajustar el tiempo de expiración aquí
+      }),
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],

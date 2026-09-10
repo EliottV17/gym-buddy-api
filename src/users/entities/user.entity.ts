@@ -7,7 +7,7 @@ import {
 import { Activity } from '../../shared/enums/activity.enum.js';
 import { ExperienceLevel } from '../../shared/enums/experience-level.enum.js';
 import { Availability } from '../../shared/enums/availability.enum.js';
-import { GeoPoint } from '../types/user.types.js';
+import type { GeoPoint } from '../types/user.types.js';
 
 @Entity('users')
 export class User {

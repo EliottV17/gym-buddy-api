@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { QueryDeepPartialEntity, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateProfileDto } from './dto/update-profile.dto.js';
-import { GeoPoint } from './types/user.types.js';
+import type { GeoPoint } from './types/user.types.js';
 
 @Injectable()
 export class UsersService {

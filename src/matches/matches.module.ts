@@ -8,5 +8,6 @@ import { Match } from './entities/match.entity.js';
   imports: [TypeOrmModule.forFeature([Match])],
   providers: [MatchesService],
   controllers: [MatchesController],
+  exports: [MatchesService],
 })
 export class MatchesModule {}
